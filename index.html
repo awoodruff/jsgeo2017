@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Expressive Cartography with Code</title>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,900" rel="stylesheet">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { 
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+      }
+
+      strong {
+        font-weight: 700;
+        color: white;
+      }
+
+      a {
+        text-decoration: underline;
+        color: #b1e9ff;
+      }
+
+      h1, h2, h3 {
+        font-weight: 900;
+        color: white;
+      }
+
+      .remark-slide-content{ color: white; font-size: 24px; background-color: #163e5f; background-size: cover !important; padding: 20px 80px;}
+      
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      .remark-slide-number { display: none; }
+
+      #intro-map {
+        position: absolute;
+        width: 110%;
+        height: 105%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      #axis {
+        position: absolute;
+        left: 0;
+      }
+
+      .shadow {
+        text-shadow: 0 0 5px black, 0 0 2px black;
+      }
+
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Expressive Cartography<br>with Code
+
+---
+
+<div id="intro-map"></div>
+
+Hi, my name is **Andy Woodruff** ([@awoodruff](http://twitter.com/awoodruff)).  
+I live across the river in Cambridge, and I make maps.
+
+---
+
+I work with [Axis Maps](http://axismaps.com).  
+We "bring the traditions of cartography to the web."
+<video id="axis"></video>
+
+---
+
+class: center, middle
+
+## i.e.,
+## _good cartographic design via code_
+
+---
+
+class: center, middle, shadow
+background-image: url(images/tp1.jpg)
+
+## "[A]nything you can imagine, you can do. I think we are living in the best time to be a cartographer."
+**Tom Patterson, National Park Service cartographer  
+_(ICC 2017, Washington, D.C.)_**
+
+---
+
+background-image: url(images/tp2.jpg)
+
+---
+
+background-image: url(images/tp3.jpg)
+
+---
+
+background-image: url(images/eca1.jpg)
+
+---
+
+background-image: url(images/eca2.jpg)
+
+---
+
+background-image: url(images/eca3.jpg)
+
+    </textarea>
+    <!--script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script-->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create();
+
+      slideshow.on('showSlide', function (slide) {
+                  console.log(slide)
+
+        var i = slide.getSlideIndex();
+        console.log(i)
+        if (i == 1) {
+          d3.xml("jsgeo.svg").mimeType("image/svg+xml").get(function(error, xml) {
+            if (error) throw error;
+            d3.select('#intro-map').node().appendChild(xml.documentElement);
+            d3.select('#intro-map').selectAll('#paths *').each(function(){
+              var p = d3.select(this);
+              var l = this.getTotalLength();
+              p.datum(l)
+                .style('stroke-dasharray', l + ' ' + l)
+                .style('stroke-dashoffset', l);
+            });
+            d3.select('#intro-map').select('#p0')
+              .transition()
+              .delay(500)
+              .duration(function(d){ return 1000 * d / 120; })
+              .ease(d3.easeLinear)
+              .style('stroke-dashoffset', 0)
+              .on('end', animate1);
+            function animate1 () {
+              d3.select('#intro-map').select('#p1')
+                .transition()
+                .duration(function(d){ return 1000 * d / 120; })
+                .ease(d3.easeLinear)
+                .style('stroke-dashoffset', 0)
+                .on('end', animate2);
+            }
+            function animate2 () {
+              d3.select('#intro-map').select('#p2')
+                .transition()
+                .duration(function(d){ return 1000 * d / 120; })
+                .ease(d3.easeLinear)
+                .style('stroke-dashoffset', 0)
+                .on('end', animate3);
+            }
+            function animate3 () {
+              d3.select('#intro-map').select('#p3')
+                .transition()
+                .duration(function(d){ return 1000 * d / 120; })
+                .ease(d3.easeLinear)
+                .style('stroke-dashoffset', 0)
+            }
+          });
+
+        }
+        if (i == 2) {
+          d3.select('#axis')
+            .attr('src', 'axis.mp4')
+            .attr('autoplay', 'true')
+            .attr('loop', 'true')
+
+        }
+        // Slide is the slide being navigated to
+      });
+
+    </script>
+  </body>
+</html>
