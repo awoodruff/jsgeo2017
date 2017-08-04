@@ -3,7 +3,7 @@
   <head>
     <title>Expressive Cartography with Code</title>
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,400,700,700i" rel="stylesheet">
     <style>
       @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
@@ -12,14 +12,27 @@
         font-weight: 300;
       }
 
+      .thin {
+        font-weight: 100;
+      }
+
       strong {
         font-weight: 700;
         color: white;
       }
 
       a {
-        text-decoration: underline;
+        text-decoration: none;
         color: #b1e9ff;
+        font-weight: 400;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .white a {
+        color: #20ade4;
       }
 
       h1, h2, h3 {
@@ -27,7 +40,7 @@
         color: white;
       }
 
-      .remark-slide-content{ color: white; font-size: 24px; background-color: #163e5f; background-size: cover !important; padding: 20px 80px;}
+      .remark-slide-content{ color: white; font-size: 30px; background-color: #163e5f; background-size: cover !important; padding: 20px 60px;}
       
       .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
 
@@ -48,13 +61,46 @@
         left: 0;
       }
 
+      .smaller {
+        font-size: 24px;
+      }
+
       .shadow {
         text-shadow: 0 0 5px black, 0 0 2px black;
+      }
+
+      .shadow-hard {
+        text-shadow: 0 0 7px black, 0 0 5px black, 0 0 2px black;
       }
 
       .white {
         background-color: white;
         color: #163e5f;
+      }
+
+      .white h1, .white h2, .white h3 {
+        color: #163e5f;
+      }
+
+      .black {
+        background-color: black;
+      }
+
+      .remark-slide-content.contain {
+        background-size: contain !important;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      .attribution {
+        font-size: 20px;
+        font-weight: 100;
+      }
+
+      .tight h1, .tight h2, .tight h3, .tight p {
+        margin: 10px 0;
       }
 
     </style>
@@ -77,17 +123,28 @@ Hi, my name is **Andy Woodruff** ([@awoodruff](http://twitter.com/awoodruff)).
 I live across the river in Cambridge, and I make maps.
 
 ---
+class: middle, shadow-hard
+background-image: url(images/axis_collage.jpg)
 
 I work with [Axis Maps](http://axismaps.com).  
-We "bring the traditions of cartography to the web."
-<video id="axis"></video>
+We **"bring the traditions of cartography to the web."**
 
 ---
 
-class: center, middle
+class: middle
 
-## i.e., we strive for
+.center[
+i.e., we strive for
 ## _good cartographic design via code_
+]
+
+.thin[_"Axis Maps was formed in 2006 and quickly became engaged with the rapidly changing field of interactive mapping. Google Maps had launched the previous spring. **We were surprised to see that the cartographic fundamentals and traditions we studied in grad school were falling by the wayside.** Many new maps focused on the technical aspects of delivering geographic content over the web rather than clear communication through cartographic design."_]
+
+---
+
+class: bottom, center
+
+background-image: url(images/chart.png)
 
 ---
 
@@ -108,10 +165,15 @@ background-image: url(images/tp3.jpg)
 
 ---
 
-class: bottom, shadow
+class: bottom, shadow-hard, smaller
 background-image: url(images/tp_cp.jpg)
 
+Shaded relief in Photoshop. This tutorial still works, 20 years later. Try it!   
 [http://www.shadedrelief.com/cp28/relief_tp.html](http://www.shadedrelief.com/cp28/relief_tp.html)
+
+---
+
+background-image: url(images/MOLOKAI-DEM.jpg)
 
 ---
 
@@ -119,29 +181,106 @@ background-image: url(images/molokai-map2.jpg)
 
 ---
 
-class: white, middle, center
+class: middle, center
 
-![](images/relief/table.png)
+![](images/relief/table.png)  
+![](images/relief/slx.png)  
+![](images/relief/sly.png)  
+![](images/relief/sl0.png)  
+![](images/relief/az.png)  
+![](images/relief/L.png)
 
-![](images/relief/slx.png)
-
-![](images/relief/sly.png)
-
-![](images/relief/sl0.png)
-
-Slocum citation TK
+.attribution[Slocum et al., Thematic Cartography and Geographic Visualization (Second edition)]
 
 ---
 
-![](images/molokai_dem.jpg)  
+## Remember when Flash was cool?
+
 ```
 public class ShadedRelief extends Sprite {
-  // Do a buncha math and junk with AS3. That's Flash. Remember Flash!?
-  // http://andywoodruff.com/blog/shaded-relief-in-as3/
+  // Do a buncha math and junk with AS3.
 }
 ```
 ![](images/molokai_shaded_tinted.jpg)
 
+.smaller[[andywoodruff.com/blog/shaded-relief-in-as3/](http://andywoodruff.com/blog/shaded-relief-in-as3/)]
+
+---
+
+## Remember when JavaScript was cool?
+
+```
+function drawRelief () {
+  // Do a buncha math and junk with JS and Canvas.
+}
+```
+![](images/molokai-relief.png)
+
+.smaller[[github.com/awoodruff/canvas-shaded-relief](https://github.com/awoodruff/canvas-shaded-relief)]
+
+---
+
+class: bottom, shadow
+
+background-image: url(images/molokai_sketchy.jpg)
+.smaller[[andywoodruff.com/blog/hachures-and-sketchy-relief-maps/](http://andywoodruff.com/blog/hachures-and-sketchy-relief-maps/)]
+
+---
+
+class: bottom, black, contain
+background-image: url(images/molokai_flow.gif)
+.smaller[[andywoodruff.com/blog/the-rain-on-terrain/](http://andywoodruff.com/blog/the-rain-on-terrain/)]
+
+---
+
+class: center, middle, shadow-hard
+background-image: url(images/handcoded.jpg)
+
+# Artisanal, hand-coded maps
+
+---
+
+class: bottom, shadow, tight
+
+background-image: url(images/whaam.jpg)
+## Re-creating art style
+"Whaam!" Mapbox style (Amy Lee Walton)
+
+---
+
+class: bottom, tight
+
+background-image: url(images/carto-petals.jpg)
+## Creative map symbols
+["Petal plot"](https://team.carto.com/u/mamataakella/builder/db498bb2-3b19-11e7-811b-0e3ebc282e83/embed) (Mamata Akella)
+
+---
+
+class: bottom, contain, tight
+
+background-image: url(images/style_transfer.jpg)
+  
+## Map style processing
+[Map style transfer](https://twitter.com/michelleful/status/766066337009590272) (Michelle Fulwood)  
+.smaller[([original map](http://www.mapsmith.net/usaresources/) Stephen Smith)]
+
+---
+
+class: bottom, white, contain, tight
+
+background-image: url(images/breathingearth.gif)
+
+## Lush rendering and animation
+[A Breathing Earth](https://www.visualcinnamon.com/portfolio/breathing-earth) (Nadieh Bremer)
+
+---
+
+class: bottom, shadow, tight
+
+background-image: url(images/parkadelphia.gif)
+
+## Friendly flair
+[Parkadelphia](https://parkadelphia.com) (Lauren Ancona)
 
 ---
 
@@ -210,13 +349,6 @@ background-image: url(images/eca3.jpg)
                 .style('stroke-dashoffset', 0)
             }
           });
-
-        }
-        if (i == 2) {
-          d3.select('#axis')
-            .attr('src', 'axis.mp4')
-            .attr('autoplay', 'true')
-            .attr('loop', 'true')
 
         }
         // Slide is the slide being navigated to
